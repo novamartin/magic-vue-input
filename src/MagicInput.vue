@@ -67,17 +67,27 @@ export default {
     this.inputValue = this.value;
     this.handleCloseBtn(this.inputValue);
     this.unActive = !(this.inputValue === '');
+    if (this.inputValue == '' || this.inputValue == null) {
+      this.unActive = true;
+    } else if (this.inputValue != null && this.inputValue != '') {
+      this.unActive = false;
+    }
   },
   methods: {
     handleInputFocus(flag) {
-      this.unActive = this.inputValue === '' && flag;
+      // this.unActive = this.inputValue === '' && flag;
+      if ( (this.inputValue == '' && flag) || (this.inputValue == null && flag) ) {
+        this.unActive = true;
+      } else {
+        this.unActive = false;
+      }
     },
     handleCloseBtn(data) {
       this.closeShow = (data !== '' && data != null);
     },
     handleClear() {
       this.inputValue = '';
-      this.$refs.input.focus();
+      // this.$refs.input.focus();
     },
   },
 };
