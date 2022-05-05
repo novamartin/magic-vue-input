@@ -14,7 +14,7 @@ export default {
   data() {
     return {
       unActive: null,
-      inputValue: '',
+      inputValue: null,
       closeShow: false,
     };
   },
@@ -66,14 +66,14 @@ export default {
   mounted() {
     this.inputValue = this.value;
     this.handleCloseBtn(this.inputValue);
-    this.unActive = this.inputValue === '';
+    this.unActive = !(this.inputValue === '');
   },
   methods: {
     handleInputFocus(flag) {
       this.unActive = this.inputValue === '' && flag;
     },
     handleCloseBtn(data) {
-      this.closeShow = (data !== '');
+      this.closeShow = (data !== '' && data != null);
     },
     handleClear() {
       this.inputValue = '';
