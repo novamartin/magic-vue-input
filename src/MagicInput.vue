@@ -2,8 +2,8 @@
   <div class="magic_input_wapper" v-if="unActive!=null">
     <div class="placeholder" :style="{'color': placeholderColor, 'fontSize': unActive? fontSize+'px':'', 'marginTop': unActive? textOffsetBot +'px':''}" :class="{placeholder_active:unActive}">{{placeholder}}</div>
     <input style="display:none">
-    <input :style="{'color': textColor, borderColor: lineColor, fontSize: fontSize +'px'}" autocomplete="off" v-if="type=='text'" ref='input' type="text" :maxlength="maxlength" v-model="inputValue" @focus="handleInputFocus(false)" @blur="handleInputFocus(true)">
-    <input :style="{'color': textColor, borderColor: lineColor, fontSize: fontSize +'px'}" autocomplete="off" v-if="type=='password'" ref='input' type="password" :maxlength="maxlength" v-model="inputValue" @focus="handleInputFocus(false)" @blur="handleInputFocus(true)">
+    <input :style="{'color': textColor, borderColor: lineColor, fontSize: fontSize +'px'}" autocomplete="off" v-if="type=='text'" ref='input' type="text" :maxlength="maxlength" v-model="inputValue" @mouseover="handleInputFocus(false)" @mouseleave="handleInputFocus(true)">
+    <input :style="{'color': textColor, borderColor: lineColor, fontSize: fontSize +'px'}" autocomplete="off" v-if="type=='password'" ref='input' type="password" :maxlength="maxlength" v-model="inputValue" @mouseover="handleInputFocus(false)" @mouseleave="handleInputFocus(true)">
     <i :style="{'color': closeBtnColor}" v-if="closeShow" @click="handleClear">×</i>
   </div>
 </template>
@@ -66,7 +66,7 @@ export default {
   mounted() {
     this.inputValue = this.value;
     this.handleCloseBtn(this.inputValue);
-    this.unActive = !(this.inputValue === '');
+    
     if (this.inputValue == '' || this.inputValue == null) {
       this.unActive = true;
     } else if (this.inputValue != null && this.inputValue != '') {
@@ -75,7 +75,7 @@ export default {
   },
   methods: {
     handleInputFocus(flag) {
-      // this.unActive = this.inputValue === '' && flag;
+      
       if ( (this.inputValue == '' && flag) || (this.inputValue == null && flag) ) {
         this.unActive = true;
       } else {
